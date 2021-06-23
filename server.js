@@ -14,4 +14,13 @@ const connection = mysql.createConnection({
 
     database: 'employee_trackerDB',
 });
-console.log("you are connected")
+console.log("you are connected!")
+
+connection.connect((err) => {
+    if (err) throw err;
+    console.log("There was an error connecting!")
+    start()
+});
+
+
+
