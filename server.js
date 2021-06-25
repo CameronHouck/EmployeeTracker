@@ -54,7 +54,7 @@ const start = () => {
             addEmp();
             break; 
 
-            case 'View Department':
+            case 'View Departments':
             viewDept();
             break;
 
