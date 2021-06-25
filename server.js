@@ -22,3 +22,58 @@ connection.connect((err) => {
     start()
 });
 
+const query = util.promisify(connection.query).bind(connection);
+
+const start = () => {
+    inquirer.prompt({
+        name: 'userOptions',
+        type: 'list',
+        message: 'What would you like to do?',
+        choices: [
+            'Add Department',
+            'Add Employee', 
+            'Add Role',
+            'View Departments',
+            'View Roles', 
+            'View Employees',
+            'Update An Employee Role',
+            'Cancel',
+        ],
+    })
+.then((answer) => {
+        switch (answer.userOptions) {
+            case 'Add Department':
+            addDept();
+            break;
+        
+            case 'Add Employee':
+            addRole();
+            break;
+            
+            case 'Add Role':
+            addEmp();
+            break; 
+
+            case 'View Department':
+            viewDept();
+            break;
+
+            case 'View Roles':
+            viewRole();
+            break;
+            
+            case 'View Employees':
+            viewEmp();
+            break;
+
+            case 'Update An Employee Role':
+            update();
+            break;
+
+            case 'Cancel':
+                connection.end();
+            break;
+        }
+    });
+};
+
