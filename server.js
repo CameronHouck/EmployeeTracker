@@ -166,3 +166,40 @@ const viewEmp = async () => {
         });
     };
 
+    const addRole = () => {
+        inquirer
+        .prompt([
+            {
+            name: 'title',
+            type: 'input',
+            message: 'Please enter the title of the new Role', 
+            },
+            {
+            name: 'salary',
+            type: 'input',
+            message: 'What is the salary for this role?',
+            },
+            {
+            name: 'dept_id',
+            type: 'input',
+            message: 'What is the department ID for this role?'
+            }
+        ])
+        .then((answer) => {
+            connection.query(
+                'INSERT INTO Emp_role SET ?',
+                {
+                    title: answer.title,
+                    salary: answer.salary,
+                    dept_id: answer.dept_id
+                },
+                (err) => {
+                    if (err) throw err;
+                    console.log('New role added!');
+                    start();
+                }
+            );
+        });
+    };
+
+
