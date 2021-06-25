@@ -122,3 +122,47 @@ const viewEmp = async () => {
         start();
     };
 
+    const addEmp = () => {
+        inquirer
+        .prompt([
+            {
+            name: "firstName",
+            type: "input",
+            message: "Please enter new Employee first name", 
+            },
+            {
+            name: "lastName",
+            type: "input",
+            message: "Please enter new Employee last name",
+            },
+            {
+            name: "roleId",
+            type: "input",
+            message: "What is the ID for this employees current role?"
+            },
+            {
+                name: "managerId",
+                type: "input",
+                message: "What is the ID for this employees manager?"
+            }
+        ])
+        .then((answer) => {
+    
+            connection.query(
+                'INSERT INTO employee SET ?',
+                {
+                    
+                    first_name: answer.firstName,
+                    last_name: answer.lastName,
+                    role_id: answer.roleId,
+                    manager_id: answer.managerId,
+                },
+                (err) => {
+                    if (err) throw err;
+                    console.log('New employee added!');
+                    start();
+                }
+            );
+        });
+    };
+
