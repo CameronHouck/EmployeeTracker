@@ -99,4 +99,26 @@ const viewRole = () => {
 });
 }
 
+const viewEmp = async () => {
+    const emp_Table = await query(
+        `SELECT e.id AS 'Employee ID',
+        e.first_name AS 'First Name',
+        e.last_name AS 'Last Name',
+        department.dept_name AS 'Department',
+        Emp_role.title AS 'Title',
+    CONCAT(m.first_name, ' ', m.last_name) 
+        AS Manager FROM 
+        employee_trackerdb.employee AS e 
+    INNER JOIN
+        Emp_role ON (e.role_id = emp_role.ID)
+    INNER JOIN
+        department ON (emp_role.dept_id = department.ID)
+    LEFT JOIN
+        employee_trackerDB.employee m ON e.manager_id = m.id
+    ORDER BY
+        department.dept_name;`
+    );
+    console.table(emp_Table);
+        start();
+    };
 
