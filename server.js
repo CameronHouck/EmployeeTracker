@@ -247,5 +247,24 @@ const viewEmp = async () => {
      });
  };
 
+ const listEmployees = async () => {
+    let employees;
+employees = await query('SELECT * FROM employee'); 
+const employeeName = employees.map((employee) => {
+    return `${employee.first_name} ${employee.last_name}`;
+});
+return employeeName;
+};
+
+
+const roleList = async () => {
+    let titleArray;
+    titleArray = await query('SELECT * FROM emp_role');
+    const titleList = titleArray.map((position) => {
+        return `${position.title}`;
+    });
+    return titleList;
+};
+
 
 
