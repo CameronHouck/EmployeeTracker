@@ -88,6 +88,15 @@ const viewDept = () => {
 });
 }
 
-
+const viewRole = () => {
+    connection.query('SELECT * FROM Emp_Role', (err, res) => {
+        if (err) throw err;
+    res.forEach(({ID, title, salary, dept_id }) => {
+        console.log(`${ID} | ${title} | ${salary} | ${dept_id}`);
+    });
+    console.log('---------------------');
+    start();
+});
+}
 
 
