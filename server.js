@@ -128,12 +128,12 @@ const viewEmp = async () => {
             {
             name: "firstName",
             type: "input",
-            message: "Please enter new Employee first name", 
+            message: "Enter new Employee's first name", 
             },
             {
             name: "lastName",
             type: "input",
-            message: "Please enter new Employee last name",
+            message: "Enter new Employee's last name",
             },
             {
             name: "roleId",
@@ -201,5 +201,51 @@ const viewEmp = async () => {
             );
         });
     };
+
+    const update = () => {
+        inquirer.prompt([
+            {
+                name: 'employee',
+                type: 'list',
+                message: 'Which Employee would you like to update?',
+                choices: () => listEmployees(),
+            },
+            {
+                name: 'newTitle',
+                type: 'list',
+                message: 'What is this employees new role?',
+                choices: () => roleList(),
+            },
+        ])
+        
+        .then(async function (res) {
+            const empArray = res.employee.split(" ");
+            const empFirst = empArray[0];
+            const empLast = empArray[1];
+            const newRole = res.newTitle;
+ 
+            const updatedRole = await query('SELECT ID FROM emp_role WHERE ?', {
+                title: newRole, 
+            });
+         
+         const empID = await query(
+             'SELECT ID FROM employee WHERE ? AND ?',
+             [{ first_name: empFirst}, {last_name: empLast }]
+         );
+ 
+         await query('UPDATE employee SET ? WHERE ?', [
+             {
+                 role_id: updatedRole[0].ID,
+             },
+             {
+                 id: empID[0].ID,
+             },
+         ]);
+ 
+         console.log('Role updated!');
+         start();
+     });
+ };
+
 
 
