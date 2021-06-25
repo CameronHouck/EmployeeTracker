@@ -26,7 +26,7 @@ const query = util.promisify(connection.query).bind(connection);
 
 const start = () => {
     inquirer.prompt({
-        name: 'userOptions',
+        name: 'Options',
         type: 'list',
         message: 'What would you like to do?',
         choices: [
@@ -41,7 +41,7 @@ const start = () => {
         ],
     })
 .then((answer) => {
-        switch (answer.userOptions) {
+        switch (answer.Options) {
             case 'Add Department':
             addDept();
             break;
@@ -76,4 +76,18 @@ const start = () => {
         }
     });
 };
+
+const viewDept = () => {
+    connection.query('SELECT * FROM department', (err, res) => {
+        if (err) throw err;
+    res.forEach(({ID, dept_name}) => {
+        console.log(`${ID} | ${dept_name}`);
+    });
+    console.log('---------------------');
+    start();
+});
+}
+
+
+
 
