@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS trackEmployeeDB;
+DROP DATABASE IF EXISTS employee_trackerDB;
 CREATE database employee_trackerDB;
 
-USE trackEmployeeDB;
+USE employee_trackerDB;
 
 CREATE TABLE department (
   ID INT NOT NULL AUTO_INCREMENT,
@@ -29,18 +29,3 @@ CREATE TABLE employee (
 SELECT * FROM department;
 SELECT * FROM emp_role;
 SELECT * FROM employee;
-
---Data inserted to fancy the data tables!
-
-("Manager", 105000, 1), 
-("Sr. Developer", 100000, 3), 
-("Jr. Developer", 5000, 3), 
-("Advisor", 4750, 4);
-
-
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES 
-("Jeff", "Bezos", 2, 3),
-("Michael", "Scott", 3 , 2),
-("Elon", "Musk", 4 , 1),
-("Cameron", "Houck", 5 , 1),
