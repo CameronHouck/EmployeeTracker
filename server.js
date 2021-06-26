@@ -108,7 +108,7 @@ const viewEmp = async () => {
         Emp_role.title AS 'Title',
     CONCAT(m.first_name, ' ', m.last_name) 
         AS Manager FROM 
-        employee_trackerdb.employee AS e 
+        employee_trackerDB.employee AS e 
     INNER JOIN
         Emp_role ON (e.role_id = emp_role.ID)
     INNER JOIN
