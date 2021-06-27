@@ -25,7 +25,7 @@ lists employees and lets you edit different attriubtes of theirs regarding their
 
 ## Demo
 
-pending
+https://youtu.be/bx7QRR9rNvw
   
 ## Installation
   
